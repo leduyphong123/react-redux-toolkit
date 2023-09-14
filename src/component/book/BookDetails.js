@@ -4,9 +4,7 @@ import {
   getBook,
   removeBook,
   selectBookDetail,
-  selectBookRemoved,
-  selectSuccess,
-  setSuccess,
+  setValue,
 } from "../../features/book/bookSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,8 +15,7 @@ function BookDetails() {
 
   const dispatch = useDispatch();
   const bookDetail = useSelector(selectBookDetail);
-  // const bookRemove = useSelector(selectBookRemoved);
-  // const success = useSelector(selectSuccess);
+
   const getBookDetail = async () => {
     if (bookDetail == null) {
       dispatch(getBook(bookId));
@@ -28,10 +25,13 @@ function BookDetails() {
   };
   useEffect(() => {
     getBookDetail();
-  }, [bookId,bookDetail]);
+     return () => {
+       if (JSON.stringify(book) !== "{}") dispatch(setValue(null));
+     };
+  }, [bookDetail]);
 
   function getBooks() {
-    navigate("/");
+    window.location.href = "/";
   }
 
   function removeBtn() {

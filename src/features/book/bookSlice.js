@@ -53,6 +53,9 @@ export const bookSlice = createSlice({
     setSuccess: (state, action) => {
       state.success = action.payload;
     },
+    setValue:(state,action) =>{
+        state.value = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -148,7 +151,7 @@ export const bookSlice = createSlice({
   },
 });
 
-export const { setLoading, setError, setSuccess } = bookSlice.actions;
+export const { setLoading, setError, setSuccess,setValue } = bookSlice.actions;
 
 export const selectLoading = (state) => state.book.loading;
 export const selectError = (state) => state.book.error;

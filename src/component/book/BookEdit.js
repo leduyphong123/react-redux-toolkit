@@ -6,19 +6,18 @@ import {
   selectBookDetail,
   selectBookEdited,
   selectSuccess,
-  setSuccess,
+  setValue
 } from "../../features/book/bookSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function BookEdit() {
+  
   const { bookId } = useParams();
   const isCreate = !bookId;
   const navigate = useNavigate();
   const [book, setBook] = useState({});
   const dispatch = useDispatch();
   const bookDetail = useSelector(selectBookDetail);
-  const bookEdit = useSelector(selectBookEdited);
-  const success = useSelector(selectSuccess);
 
   const getBookDetail = async () =>{
     if (bookDetail == null) {
@@ -27,9 +26,12 @@ function BookEdit() {
       setBook(bookDetail);
     }
   }
-
   useEffect(() => {
     getBookDetail();
+    return () =>{
+      if(JSON.stringify(book) !=='{}')
+       dispatch(setValue(null));
+    }
   }, [bookId,bookDetail]);
 
   function handleChange(event) {
