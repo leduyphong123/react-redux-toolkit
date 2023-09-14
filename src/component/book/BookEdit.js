@@ -20,15 +20,17 @@ function BookEdit() {
   const bookEdit = useSelector(selectBookEdited);
   const success = useSelector(selectSuccess);
 
-
-  useEffect(() => {
-    if (!success) {
+  const getBookDetail = async () =>{
+    if (bookDetail == null) {
       dispatch(getBook(bookId));
     } else {
       setBook(bookDetail);
-      dispatch(setSuccess(false));
     }
-  }, [bookDetail]);
+  }
+
+  useEffect(() => {
+    getBookDetail();
+  }, [bookId,bookDetail]);
 
   function handleChange(event) {
     setBook({
@@ -39,7 +41,6 @@ function BookEdit() {
 
   function handleSubmit() {
     dispatch(editBook(book));
-    dispatch(setSuccess(false));
     navigate("/");
   }
 

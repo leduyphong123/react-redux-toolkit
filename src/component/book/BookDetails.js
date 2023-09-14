@@ -17,24 +17,20 @@ function BookDetails() {
 
   const dispatch = useDispatch();
   const bookDetail = useSelector(selectBookDetail);
-  const bookRemove = useSelector(selectBookRemoved);
-  const success = useSelector(selectSuccess);
-  console.log(success);
+  // const bookRemove = useSelector(selectBookRemoved);
+  // const success = useSelector(selectSuccess);
   const getBookDetail = async () => {
-    if (!success) {
+    if (bookDetail == null) {
       dispatch(getBook(bookId));
     } else {
       setBook(bookDetail);
-      // dispatch(setSuccess(false));
     }
-    console.log(bookDetail);
   };
   useEffect(() => {
     getBookDetail();
-  }, [bookDetail]);
+  }, [bookId,bookDetail]);
 
   function getBooks() {
-    console.log("b");
     navigate("/");
   }
 

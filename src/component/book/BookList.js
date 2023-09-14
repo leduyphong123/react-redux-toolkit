@@ -20,14 +20,11 @@ export default function BookList() {
       dispatch(getBooks());
     } else {
       setBooks(bookList);
-      dispatch(setSuccess(false));
     }
   };
 
   useEffect(() => {
     getBookList();
-
-    // eslint-disable-next-line
   }, [bookList]);
 
   function handleCreate(e) {
